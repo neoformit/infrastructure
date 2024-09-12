@@ -12,6 +12,21 @@
   use_temp_files: true
   temp_path: /mnt/tmp
 
+- type: webdav
+  id: uq_nextcloud
+  label: UQ RDM
+  doc: |
+    Transfer data to/from the University of Queensland RDM.
+    Configure access in User -> Preferences -> Manage Information.
+  url: https://cloud.rdm.uq.edu.au/remote.php/dav/files/
+  login: ${user.preferences['uq_nextcloud_account|username']}
+  password: ${user.preferences['uq_nextcloud_account|password']}
+  writable: true
+  # Set the following settings to avoid loading entire files into memory
+  # useful when dealing with big files
+  use_temp_files: true
+  temp_path: /mnt/tmp
+
 - type: dropbox
   id: dropbox
   label: Dropbox

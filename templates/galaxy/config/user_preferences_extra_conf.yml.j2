@@ -64,7 +64,19 @@ preferences:
               label: API Key
               type: password
               store: vault
-              required: False   
+              required: False
+
+    uq_nextcloud_account:
+        description: University of Queensland RDM Credentials
+        inputs:
+            - name: username
+              label: Email
+              type: text
+              required: False
+            - name: password
+              label: App token
+              type: password
+              required: False
 {% endif %}
 
     griffith_owncloud_account:
@@ -78,4 +90,3 @@ preferences:
               label: App Password
               type: password
               required: False
-
