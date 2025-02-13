@@ -57,6 +57,7 @@ services:
       - "8000:8000"
     volumes:
       - /srv:/srv
+      - "{{labs_temp_dir}}:{{ labs_temp_dir }}"
     environment:
       - DJANGO_SETTINGS_MODULE=app.settings.prod
     command: >
@@ -87,6 +88,7 @@ services:
       - "{{ labs_django_root }}/app/media:/var/www/media:ro"
       - "{{ labs_config_root }}/nginx/ssl:/etc/nginx/ssl:ro"
       - "{{ labs_config_root }}/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro"
+      - "{{labs_temp_dir}}:{{ labs_temp_dir }}"
       - /var/log/nginx:/var/log/nginx:rw
       - /var/www/certbot/:/var/www/certbot/:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
