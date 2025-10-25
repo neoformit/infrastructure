@@ -926,6 +926,24 @@ galaxy_subsites:
       #masthead .navbar-text {
         display: none;
       }
+  - name: biodiversity
+    brand: Biodiversity Lab
+    iframe: "https://labs.usegalaxy.org.au/?content_root=https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/usegalaxy.org.au.yml"
+    wallpaper: false
+    tool_sections: []
+    custom_css: |
+      #masthead .navbar-nav>li.active {
+        background: #489d5f !important;
+      }
+      #masthead {
+        background: #2a7240 !important;
+      }
+      #masthead a.navbar-brand::after {
+        content: "Australia - Biodiversity Lab";
+      }
+      #masthead .navbar-text {
+        display: none;
+      }
 
 webhook_plugins:
   - subdomain_switcher_24.2
