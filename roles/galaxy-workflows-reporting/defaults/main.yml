@@ -1,0 +1,4 @@
+---
+workflow_invocations_dir: /home/ubuntu/workflow_invocations
+workflow_invocations_venv: "{{ workflow_invocations_dir }}/venv"
+workflow_invocations_influxdb_database: workflow_invocations
