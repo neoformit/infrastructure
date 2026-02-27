@@ -17,6 +17,14 @@
     requirements: "{{ workflow_invocations_dir }}/requirements.txt"
   when: _wf_requirements.changed
 
+- name: Template workflow invocations .env file
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ workflow_invocations_dir }}/.env"
+    mode: "0600"
+    owner: ubuntu
+  notify: restart collect-workflow-invocations
+
 - name: Template workflow invocations Python script
   ansible.builtin.template:
     src: collect_workflow_invocations.py.j2
