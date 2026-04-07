@@ -21,12 +21,11 @@
 
 - name: Add cron job to run workflow invocations collection script
   ansible.builtin.cron:
-    name: "Collect workflow invocations every quarter hour"
-    minute: "*/15"
+    name: "Collect workflow invocations hourly"
+    minute: "5"
     hour: "*"
     job: >-
       cd {{ workflow_invocations_dir }}
       && {{ virtualenv_dir }}/bin/python collect_workflow_invocations.py
-      {{ nginx_workflows_log }}
       >> workflow_invocations.log 2>&1
     when: workflows_reporting_enabled

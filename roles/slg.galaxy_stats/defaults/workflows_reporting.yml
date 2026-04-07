@@ -1,4 +1,10 @@
 ---
-workflows_reporting_enabled: true
-workflow_invocations_dir: "{{ galaxy_root }}/workflows_reporting"
-nginx_workflows_log: /var/log/nginx/workflows.access.log
+reporting_dir: "/opt/reporting"
+reporting_s3_bucket: cam-logs-test
+reporting_s3_prefix: nginx-logs/dev/
+reporting_s3_endpoint_url: https://object-store.rc.nectar.org.au
+reporting_s3_access_key: "{{ vault_reporting_s3_access_key }}"
+reporting_s3_secret_key: "{{ vault_reporting_s3_secret_key }}"
+reporting_s3_region: us-east-1
+
+workflow_invocations_dir: "{{ reporting_dir }}/workflow_invocations"
