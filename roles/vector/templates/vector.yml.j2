@@ -1,0 +1,45 @@
+---
+data_dir: /var/lib/vector
+
+sources:
+  nginx_logs:
+    type: file
+    include:
+      - "{{ vector_nginx_log_file }}"
+
+transforms:
+  nginx_logs_data:
+    inputs:
+      - nginx_logs
+    type: remap
+    source: |
+      .parsed = parse_nginx_log!(.message, "combined")
+
+sinks:
+  out:
+    inputs:
+      - nginx_logs_data
+    type: console
+    encoding:
+      codec: text
+  s3:
+    inputs:
+      - nginx_logs_data
+    type: aws_s3
+    bucket: "{{ vector_s3_bucket }}"
+    region: "{{ vector_s3_region }}"
+    key_prefix: "{{ vector_s3_key_prefix }}"
+    compression: "{{ vector_s3_compression }}"
+{% if vector_s3_endpoint %}
+    endpoint: "{{ vector_s3_endpoint }}"
+{% endif %}
+    auth:
+      access_key_id: "{{ vector_s3_access_key_id }}"
+      secret_access_key: "{{ vector_s3_secret_access_key }}"
+    encoding:
+      codec: json
+    framing:
+      method: newline_delimited
+    batch:
+      timeout_secs: 3600      # 1 hour
+      max_bytes: 100_000_000  # 100 MB
